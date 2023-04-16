@@ -1,18 +1,17 @@
-import { json } from "stream/consumers";
+import Search from "../components/Search";
 
 export default async function HomePage() {
   const data = await getData()
-  console.log(data)
+  const champions = Object.keys(data.data).map(champ => champ)
+  console.log(champions)
+
     return (
       <div className="container">
-      <h1>{JSON.stringify(data)}</h1>
         <div className="grid grid-cols-3 gap-4">
           <div className="grid grid-rows-5 gap-4">
             <h1 className= "text-3xl font-bold">Blue Team</h1>
             <div className="box-border h-16 w-64 p-4 border-4">
-              <div>
-                <input className="enabled:hover:border-gray-400 disabled:opacity-75 ..." />
-              </div>
+              <Search/>
             </div>
             <div className="box-border h-16 w-64 p-4 border-4">
               <input className="enabled:hover:border-gray-400 disabled:opacity-75 ..." />
