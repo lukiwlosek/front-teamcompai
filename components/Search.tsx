@@ -2,7 +2,7 @@
 import { useState } from "react"
 
 
-export default function Search({champions}: any) {
+export default function Search({onData, champions, rolesSet}: any) {
     const [search, setSearch] = useState("")
     const [results, setResults] = useState([]);
 
@@ -16,13 +16,14 @@ export default function Search({champions}: any) {
             })
             setResults(filteredResults)
         } else {
-            setResults([])
+            setResults(champions)
         }
     }
 
     function handleResultClick(event: any, result: any) {
         event.preventDefault();
         setSearch(result);
+        onData(result)
         setResults([]);
     }
 
@@ -31,7 +32,11 @@ export default function Search({champions}: any) {
         <div> 
             <input className="enabled:hover:border-gray-400 disabled:opacity-75"
                 value={search}
-                onChange={handleInputChange} 
+                onChange={(event) => {
+                    handleInputChange(event)
+                    onData(event.target.value)
+                    }
+                } 
             />
 
             <div className="bg-white">
